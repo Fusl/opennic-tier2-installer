@@ -58,11 +58,11 @@ case "$distri" in
 		esac
 		mkdir -p "/etc/dnscrypt-wrapper/" "/etc/cron.d/" "/usr/local/src/cjdns-$$/"
 		apt-get update
-		apt-get -y --no-install-recommends install git python curl fping build-essential ca-certificates wget dnsutils pdns-recursor libevent-dev
+		apt-get -y --no-install-recommends install git python curl fping build-essential ca-certificates wget dnsutils libevent-dev
 		echo "deb http://repo.meo.ws/debian/ $versionname main" > /etc/apt/sources.list.d/fvzrepo.list
 		wget -qO- "https://scr.meo.ws/paste/2015-10-07-16-37-22-6gIhrLDm.txt" | apt-key add -
 		apt-get update
-		apt-get -y --no-install-recommends install libsodium dnscrypt-wrapper
+		apt-get -y --no-install-recommends install libsodium dnscrypt-wrapper pdns-recursor
 		test -f /etc/dnscrypt-wrapper/fingerprint || (
 			cd /etc/dnscrypt-wrapper/
 			dnscrypt-wrapper --gen-provider-keypair | egrep '^Public key fingerprint' | awk '{print $4}' > /etc/dnscrypt-wrapper/fingerprint
